@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Central Site</title>
+
+    <!-- Browser Tab Icon (Favicon) -->
+    <link rel="icon" type="image/x-icon" href="images/Icon.ico">
+
+    <!-- Google Fonts: Bebas Neue for tall bold title, Inter for modern clean text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Dark grey background and centered layout */
+        body {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            overflow-x: hidden;
+        }
+
+        /* Tall, white, bold title */
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            letter-spacing: 4px;
+            color: #ffffff;
+            margin: 0 0 40px 0;
+            text-align: center;
+            line-height: 0.95;
+            max-width: 100%;
+        }
+
+        /* Container for the 3 images in a row */
+        .image-container {
+            display: flex;
+            gap: clamp(16px, 2.5vw, 32px);
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 100%;
+            padding: 12px;
+        }
+
+        /* Card wrapper link with outline and hover effects */
+        .image-card {
+            display: block;
+            position: relative;
+            width: min(350px, 28vw);
+            min-width: 200px;
+            aspect-ratio: 1 / 1;
+            border-radius: 20px;
+            overflow: hidden; /* Keeps image corners rounded */
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Expand card slightly and brighten outline on hover */
+        .image-card:hover {
+            transform: scale(1.06);
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Base image styling */
+        .image-card img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Hover image hidden by default */
+        .image-card .hover-img {
+            opacity: 0;
+        }
+
+        /* Image swap on hover */
+        .image-card:hover .default-img {
+            opacity: 0;
+        }
+
+        .image-card:hover .hover-img {
+            opacity: 1;
+        }
+
+        /* --- Question Mark Button --- */
+        .info-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.65);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.3s ease, background 0.2s ease, transform 0.2s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Reveal question mark button when hovering over the card */
+        .image-card:hover .info-btn {
+            opacity: 1;
+        }
+
+        /* Question mark button hover effect */
+        .info-btn:hover {
+            background: #ffffff;
+            color: #1e1e1e;
+            transform: scale(1.15);
+        }
+
+        /* --- Modal Popup Window --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        /* Show modal */
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #2a2a2a;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 32px;
+            max-width: 650px;
+            width: 100%;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        /* Close X button */
+        .close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: transparent;
+            border: none;
+            color: #aaaaaa;
+            font-size: 28px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+
+        .close-btn:hover {
+            color: #ffffff;
+        }
+
+        /* Body layout inside modal (Text on Left, Image on Right) */
+        .modal-body {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .modal-text {
+            flex: 1;
+        }
+
+        .modal-text h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin: 0 0 12px 0;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .modal-text p {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #cccccc;
+        }
+
+        .modal-image-wrap {
+            flex: 0 0 180px;
+            width: 180px;
+            height: 180px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Responsive adjustment for small phone screens */
+        @media (max-width: 550px) {
+            .modal-body {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .modal-image-wrap {
+                flex: none;
+                width: 140px;
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>The Central Site</h1>
+
+    <div class="image-container">
+        <!-- Card 1 -->
+        <a href="https://blaster1741.github.io/Games/Spelunky%20Classic/" class="image-card">
+            <button class="info-btn" aria-label="More Info" onclick="openModal(event, 'Spelunky Classic', 'You may have seen Spelunky mentioned somewhere and asked yourself ``What is Spelunky?`` Spelunky is a platformer with lots of monsters, items, traps, and secrets. Dying in Spelunky can be quick and painful. But each time you restart, you`ll play a new, randomly-generated set of levels! It will feel fresh and exciting, and you`ll have to think on your feet. You can pick up and use or toss practically everything you come across (to your own detriment, if you`re not careful! There`s a lot of freedom to how you want to navigate the levels, which are fully-destructible. And even though they`re randomized, you will still get more skilled over time! If you play enough, not only will you get good enough to beat the game, but you may start to unravel some of its deepest secrets...). - Spelunky World', 'images/SpelunkyClassic.gif')">?</button>
+            <img src="images/SpelunkyClassic.png" alt="Image 1" class="default-img">
+            <img src="images/SpelunkyClassic.gif" alt="Image 1 Hover" class="hover-img">
+        </a>
+
+        <!-- Card 2 -->
+        <a href="https://blaster1741.github.io/Games/Granule/index.html" class="image-card">
+            <button class="info-btn" aria-label="More Info" onclick="openModal(event, 'Granule', 'Granule is a physics sandbox built around a ragdoll who won`t stay dead. Break, bleed, burn, and dismember him with a growing set of tools, powers, and more. It all starts with Murray, a man who, on a particularly bad day, did not let a certain driver merge onto the highway. That driver was a witch. In her rage, she sent Murray to The Granule - a dimension beyond death, but not beyond torment. Unknown to the witch and Murray, something already lives there. You. You have Murray now. He can`t die here, not the way people are supposed to. The Granule doesn`t allow it. But everything short of that is still on the table. Nothing that happens to him is decided in advance. He tries to stay standing and awake, bleeds when you give him a reason to, and mostly loses. When you`ve seen enough, you can patch him up and start again. He probably doesn`t mind. There are other things scattered around The Granule: some that explode, stab, sever, and mend, and some far older, far more powerful, that answer to nobody but you. Neither the witch nor Murray were ever meant to touch them. There will be more - other tools, other challenges, ways to build your own Murrays and worse places to keep them. For now, he`s yours. The witch isn`t coming back for him, and You were always here. There will be more - other tools, other challenges, ways to build your own Murrays and worse places to keep them. For now, he`s yours. The witch isn`t coming back for him, and You were always here.', 'images/Granule.gif')">?</button>
+            <img src="images/Granule.png" alt="Image 2" class="default-img">
+            <img src="images/Granule.gif" alt="Image 2 Hover" class="hover-img">
+        </a>
+
+        <!-- Card 3 -->
+        <a href="https://blaster1741.github.io/Games/people%20playground/index.html" class="image-card">
+            <button class="info-btn" aria-label="More Info" onclick="openModal(event, 'people playground.', 'Shoot, stab, burn, poison, tear, vaporise, or crush ragdolls. This game is for people who enjoy throwing around ragdolls but want it to be more detailed, satisfying, and feel more free while doing so. Ragdolls are simple on the outside but detailed on the inside. You can siphon their blood and replace it with nitroglycerine. You can submerge their head and cause brain damage by asphyxiation. Think of something horrible, and you can probably do it in People Playground. Afterwards, you could even hook them up to an ECG and blood supply to try to get them back on their feet.', 'images/peopleplayground.gif')">?</button>
+            <img src="images/peopleplayground.png" alt="Image 3" class="default-img">
+            <img src="images/peopleplayground.gif" alt="Image 3 Hover" class="hover-img">
+        </a>
+    </div>
+
+    <!-- Popup Modal Window -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-body">
+                <div class="modal-text">
+                    <h2 id="modalTitle">TITLE</h2>
+                    <p id="modalDescription">Description goes here...</p>
+                </div>
+                <div class="modal-image-wrap">
+                    <img id="modalImg" src="" alt="Popup Preview Image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalImg = document.getElementById('modalImg');
+
+        // Function to open modal with specific content
+        function openModal(event, title, description, hoverImgSrc) {
+            // Stop link navigation and click event bubbling
+            event.preventDefault();
+            event.stopPropagation();
+
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+            modalImg.src = hoverImgSrc;
+
+            modalOverlay.classList.add('active');
+        }
+
+        // Function to close modal
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+        }
+
+        // Close modal when clicking outside the modal content box
+        function closeModalOnBackdrop(event) {
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        }
+
+        // Close modal when pressing the Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
+The Central Site by Blaster aka Ethan.
