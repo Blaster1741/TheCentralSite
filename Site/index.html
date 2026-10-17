@@ -45,14 +45,14 @@
             max-width: 100%;
         }
 
-        /* Container for the 3 images in a row */
+        /* Container for the image grid */
         .image-container {
             display: flex;
             gap: clamp(16px, 2.5vw, 32px);
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            max-width: 100%;
+            max-width: 1200px;
             padding: 12px;
         }
 
@@ -262,25 +262,48 @@
     <h1>The Central Site</h1>
 
     <div class="image-container">
+        <!-- ROW 1 -->
         <!-- Card 1 -->
         <a href="https://blaster1741.github.io/Games/Spelunky%20Classic/" class="image-card">
             <button class="info-btn" aria-label="More Info" onclick="openModal(event, 'Spelunky Classic', 'You may have seen Spelunky mentioned somewhere and asked yourself ``What is Spelunky?`` Spelunky is a platformer with lots of monsters, items, traps, and secrets. Dying in Spelunky can be quick and painful. But each time you restart, you`ll play a new, randomly-generated set of levels! It will feel fresh and exciting, and you`ll have to think on your feet. You can pick up and use or toss practically everything you come across (to your own detriment, if you`re not careful! There`s a lot of freedom to how you want to navigate the levels, which are fully-destructible. And even though they`re randomized, you will still get more skilled over time! If you play enough, not only will you get good enough to beat the game, but you may start to unravel some of its deepest secrets...). - Mossmouth, Spelunky World', 'images/SpelunkyClassic.gif')">?</button>
-            <img src="images/SpelunkyClassic.png" alt="Image 1" class="default-img">
-            <img src="images/SpelunkyClassic.gif" alt="Image 1 Hover" class="hover-img">
+            <img src="images/SpelunkyClassic.png" alt="Spelunky Classic" class="default-img">
+            <img src="images/SpelunkyClassic.gif" alt="Spelunky Classic Hover" class="hover-img">
         </a>
 
         <!-- Card 2 -->
         <a href="https://blaster1741.github.io/Games/Granule/index.html" class="image-card">
             <button class="info-btn" aria-label="More Info" onclick="openModal(event, 'Granule', 'Granule is a physics sandbox built around a ragdoll who won`t stay dead. Break, bleed, burn, and dismember him with a growing set of tools, powers, and more. - Tevark, Granule on Steam', 'images/Granule.gif')">?</button>
-            <img src="images/Granule.png" alt="Image 2" class="default-img">
-            <img src="images/Granule.gif" alt="Image 2 Hover" class="hover-img">
+            <img src="images/Granule.png" alt="Granule" class="default-img">
+            <img src="images/Granule.gif" alt="Granule Hover" class="hover-img">
         </a>
 
         <!-- Card 3 -->
         <a href="https://blaster1741.github.io/Games/people%20playground/index.html" class="image-card">
             <button class="info-btn" aria-label="More Info" onclick="openModal(event, 'people playground.', 'Shoot, stab, burn, poison, tear, vaporise, or crush ragdolls. This game is for people who enjoy throwing around ragdolls but want it to be more detailed, satisfying, and feel more free while doing so. Ragdolls are simple on the outside but detailed on the inside. You can siphon their blood and replace it with nitroglycerine. You can submerge their head and cause brain damage by asphyxiation. Think of something horrible, and you can probably do it in People Playground. Afterwards, you could even hook them up to an ECG and blood supply to try to get them back on their feet. - mestiez, people playground. on Steam', 'images/peopleplayground.gif')">?</button>
-            <img src="images/peopleplayground.png" alt="Image 3" class="default-img">
-            <img src="images/peopleplayground.gif" alt="Image 3 Hover" class="hover-img">
+            <img src="images/peopleplayground.png" alt="people playground" class="default-img">
+            <img src="images/peopleplayground.gif" alt="people playground Hover" class="hover-img">
+        </a>
+
+        <!-- ROW 2 -->
+        <!-- Card 4 -->
+        <a href="https://blaster1741.github.io/Games/Minecraft/index.html" class="image-card">
+            <button class="info-btn" aria-label="More Info" onclick="openModal(event, 'Minecraft 1.26.2 - Chaos Cubed', 'Discover the world of Minecraft: Build anything you can imagine, uncover eerie mysteries, and survive the night in the ultimate sandbox adventure game. In Minecraft, every playthrough is different, and unforgettable adventures await behind every corner. Explore and craft your way through an infinite world that’s yours to shape, one block at a time. - Mojang, Minecraft.net', 'images/Minecraft.gif')">?</button>
+            <img src="images/Minecraft.png" alt="Game 4" class="default-img">
+            <img src="images/Minecraft.gif" alt="Game 4 Hover" class="hover-img">
+        </a>
+
+        <!-- Card 5 -->
+        <a href="https://blaster1741.github.io/Games/The Binding of Isaac/index.html" class="image-card">
+            <button class="info-btn" aria-label="More Info" onclick="openModal(event, 'The Binding of Isaac: Repentance Plus - Beta', 'PRAY FOR REPENTANCE AND BE REBORN Experience the modern classic, The Binding of Isaac, like you`ve never seen it before. It`s a game too big to be called a sequel: Repentance takes Isaac to new heights of roguelike dungeon adventure, as the brave boy descends into the basement for his greatest challenge yet! Isaac`s new quest takes him to unknown places he`s never been, filled with horrible new enemies and bosses, weapon combos you`ve never synergized before and items he`s never seen... unholy terrors from his wildest dreams and worst nightmares! - Nicalis, Inc., Edmund McMillen, The Binding of Isaac: Repentance on Steam', 'images/TBOI.gif')">?</button>
+            <img src="images/TBOI.png" alt="Game 5" class="default-img">
+            <img src="images/TBOI.gif" alt="Game 5 Hover" class="hover-img">
+        </a>
+
+        <!-- Card 6 -->
+        <a href="https://blaster1741.github.io/Games/Stardew Valley/index.html" class="image-card">
+            <button class="info-btn" aria-label="More Info" onclick="openModal(event, 'Stardew Valley - 1.6.15', 'You`ve inherited your grandfather`s old farm plot in Stardew Valley. Armed with hand-me-down tools and a few coins, you set out to begin your new life. Can you learn to live off the land and turn these overgrown fields into a thriving home? It won`t be easy. Ever since Joja Corporation came to town, the old ways of life have all but disappeared. The community center, once the town`s most vibrant hub of activity, now lies in shambles. But the valley seems full of opportunity. With a little dedication, you might just be the one to restore Stardew Valley to greatness! - ConcernedApe, Stardew Valley on Steam', 'images/Stardew Valley.gif')">?</button>
+            <img src="images/Stardew Valley.png" alt="Game 6" class="default-img">
+            <img src="images/Stardew Valley.gif" alt="Game 6 Hover" class="hover-img">
         </a>
     </div>
 

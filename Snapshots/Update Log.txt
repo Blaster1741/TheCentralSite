@@ -1,2 +1,5 @@
+2.0: Second wave of games, Minecraft 1.26.2, The Binding of Isaac: Repentance Plus - Beta, Stardew Valley 1.6.15
+
 1.1: Shorten granule description
-1.0: First build
+
+1.0: First build, first wave of games, Spelunky Classic HD, Granule, People Playground
