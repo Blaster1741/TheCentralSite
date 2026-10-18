@@ -1,4 +1,6 @@
-3.0 Third wave of games, FTL demo, Hollow Knight, Hollow Knight Silksong
+3.1: Fixed FTL.png
+
+3.0: Third wave of games, FTL demo, Hollow Knight, Hollow Knight Silksong
 Thanks to Carter54 for the web build of Faster Than Light!
 
 2.0: Second wave of games, Minecraft 1.26.2, The Binding of Isaac: Repentance Plus - Beta, Stardew Valley 1.6.15
