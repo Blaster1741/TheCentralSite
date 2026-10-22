@@ -1,6 +1,3 @@
-4.0 Fourth wave of games: mobile edition, Jetpack Joyride, Bad Piggies, Fruit Ninja
-Fixed Stardew Valley.gif, was corrupted
-
 3.1: Fixed FTL.png
 
 3.0: Third wave of games, FTL demo, Hollow Knight, Hollow Knight Silksong
