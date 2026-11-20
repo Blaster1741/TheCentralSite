@@ -1,3 +1,5 @@
+7.1: Lowered .gif quality for faster loading, fixed index.html
+
 7.0: Seventh wave of games: Top-Down edition, RimWorld, Ages of Conflict, Plants vs. Zombies
 
 6.0: Sixth wave of games: Misc. edition, Football Bros, The Henry Stickmin Collection, Evolution by Keiwan
